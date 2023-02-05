@@ -14,6 +14,8 @@ public class GameExecutor : MonoBehaviour
     [SerializeField]
     private Transform canvasGame;
 
+    ControllerStep stepMission;
+
     public int IndexStepMission { get => indexStepMission; set => indexStepMission = value; }
 
     IEnumerator Start()
@@ -42,14 +44,40 @@ public class GameExecutor : MonoBehaviour
 
     public void SetStepMission(MissionInfo_SO currentStepMisison)
     {
-        backgroundGame.sprite = currentStepMisison.MissionsList[IndexStepMission].backgroundMissionStep;
-        GameObject gameObjStepMission = Instantiate(currentStepMisison.MissionStepGame, canvasGame);
-        gameObjStepMission.transform.SetParent(canvasGame);
-        
-        ControllerStep stepMission = gameObjStepMission.GetComponent<ControllerStep>();
-        stepMission.GameExecutor = this;
-        stepMission.SetTapButtons();
+        if (IndexStepMission >= currentStepMisison.MissionsList.Length)
+        {
+            Debug.Log("==>Mission finished, all steps ");
+            //Back to map menu
+        }
+        else
+        {
+            backgroundGame.sprite = currentStepMisison.MissionsList[IndexStepMission].backgroundMissionStep;
+            GameObject gameObjStepMission = Instantiate(currentStepMisison.MissionStepGame, canvasGame);
+            gameObjStepMission.transform.SetParent(canvasGame);
 
-        GameController.Instance.CurrentStatusGame = StatusGame.Play;
+            stepMission = gameObjStepMission.GetComponent<ControllerStep>();
+            stepMission.GameExecutor = this;
+            stepMission.SetTapButtons();
+        }
+
+
+    }
+
+    public void StepMissionFinished()
+    {
+        IndexStepMission++;
+
+        if (CanvasGeneralGame.Instance != null)
+        {
+            CanvasGeneralGame.Instance.Fade.FadeIn();
+        }
+        if (stepMission != null)
+        {
+            Destroy(stepMission.gameObject);
+            stepMission = null;
+        }
+
+        StartCoroutine(Start());
+
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ControllerStep : MonoBehaviour
 {
+    [SerializeField]
+    private int currentTaps = 0;
+    
     [SerializeField]
     private List<GoalTapButton> tapsButtons;
 
@@ -15,15 +18,18 @@ public class ControllerStep : MonoBehaviour
     private GameExecutor gameExecutor;
 
     public GameExecutor GameExecutor { get => gameExecutor; set => gameExecutor = value; }
+    public int CurrentTaps { get => currentTaps; set => currentTaps = value; }
 
     int totalTapsStepMission;
+
+    public UnityEvent StartGame;
 
     [ContextMenu("SetTapButtons")]
     public void SetTapButtons()
     {
         totalTapsStepMission = GameController.Instance.CurrentMissionToPlay.MissionsList[gameExecutor.IndexStepMission].missionGoalToAchieve.TotalTaps;
 
-        int buttonsToUse = Random.Range(4, tapsButtons.Count + 1);
+        int buttonsToUse = Random.Range(4, tapsButtons.Count - 1);
         Debug.Log("==>Buttons to use: " + buttonsToUse);
 
         int tapsPerButton = totalTapsStepMission / buttonsToUse;
@@ -53,7 +59,26 @@ public class ControllerStep : MonoBehaviour
 
         foreach (var tapButton in tapsButtons)
         {
-
+            tapButton.TapsToAchieve = tapsPerButton;
+            tapButton.ControllerStep = this;
         }
+
+        tapsButtons[Random.Range(0, tapsButtons.Count-1)].TapsToAchieve += missingTaps;
+
+        StartGame?.Invoke();
+    }
+
+    public void CheckStatusStep()
+    {
+        if(CurrentTaps >= totalTapsStepMission)
+        {
+            Debug.Log("==>Mission step finished!");
+            GameController.Instance.CurrentStatusGame = StatusGame.Idle;
+
+            gameExecutor.StepMissionFinished();//Probably call from a button
+            
+            return;
+        }
+        Debug.Log("==There are taps!! "+CurrentTaps +" Total taps: "+totalTapsStepMission);
     }
 }

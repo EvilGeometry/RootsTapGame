@@ -11,7 +11,12 @@ public class GoalTapButton : MonoBehaviour
     private int tapsToAchieve;
 
     [SerializeField]
-    private int currentTaps = 0;
+    private int currentTapsButton;
+
+    ControllerStep controllerStep;
+
+    public int TapsToAchieve { get => tapsToAchieve; set => tapsToAchieve = value; }
+    public ControllerStep ControllerStep { get => controllerStep; set => controllerStep = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +29,16 @@ public class GoalTapButton : MonoBehaviour
     /// </summary>
     public void Tapping()
     {
-        currentTaps++;
-        if(currentTaps >= tapsToAchieve)
+        if (GameController.Instance.CurrentStatusGame != StatusGame.Play)
+            return;
+        
+        ControllerStep.CurrentTaps++;
+        currentTapsButton++;
+        if(currentTapsButton >= TapsToAchieve)
         {
             tapButton.interactable = false;
+            Debug.Log("==>Tap button disabled!, check step mission status!");
+            ControllerStep.CheckStatusStep();
         }
     }
 }
