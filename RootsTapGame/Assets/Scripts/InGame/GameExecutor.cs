@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameExecutor : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameExecutor : MonoBehaviour
 
     [SerializeField]
     private Transform canvasGame;
+
+    [SerializeField]
+    private GameObject panelMissionFinished;
 
     ControllerStep stepMission;
 
@@ -46,8 +50,9 @@ public class GameExecutor : MonoBehaviour
     {
         if (IndexStepMission >= currentStepMisison.MissionsList.Length)
         {
-            Debug.Log("==>Mission finished, all steps ");
+            Debug.Log("==>Mission finished, all steps finished");
             //Back to map menu
+            panelMissionFinished.gameObject.SetActive(true);
         }
         else
         {
@@ -59,8 +64,6 @@ public class GameExecutor : MonoBehaviour
             stepMission.GameExecutor = this;
             stepMission.SetTapButtons();
         }
-
-
     }
 
     public void StepMissionFinished()
@@ -71,6 +74,13 @@ public class GameExecutor : MonoBehaviour
         {
             CanvasGeneralGame.Instance.Fade.FadeIn();
         }
+        StartCoroutine(PrepareGameWhenFinish());
+    }
+
+    IEnumerator PrepareGameWhenFinish()
+    {
+        yield return new WaitForSeconds(1f);
+
         if (stepMission != null)
         {
             Destroy(stepMission.gameObject);
@@ -78,6 +88,28 @@ public class GameExecutor : MonoBehaviour
         }
 
         StartCoroutine(Start());
+    }
 
+    /// <summary>
+    /// When the button is pressed and assign the mission to be played
+    /// and loads the game scene.
+    /// </summary>
+    public void LoadSceneString(string sceneName)
+    {
+        //CanvasGeneralGame.Instance.Fade.FadeIn();
+        GameController.Instance.CurrentStatusGame = StatusGame.Idle;
+        StartCoroutine(LoadScene(sceneName));
+    }
+
+    IEnumerator LoadScene(string sceneName)
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
     }
 }

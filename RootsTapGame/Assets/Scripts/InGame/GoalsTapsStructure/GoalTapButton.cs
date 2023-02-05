@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GoalTapButton : MonoBehaviour
 {
+    [SerializeField]
     Button tapButton;
 
     [SerializeField]
@@ -17,12 +18,8 @@ public class GoalTapButton : MonoBehaviour
 
     public int TapsToAchieve { get => tapsToAchieve; set => tapsToAchieve = value; }
     public ControllerStep ControllerStep { get => controllerStep; set => controllerStep = value; }
+    public Button TapButton { get => tapButton; set => tapButton = value; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        tapButton = GetComponent<Button>();
-    }
 
     /// <summary>
     /// Method called from the button OnClick event.
@@ -36,7 +33,7 @@ public class GoalTapButton : MonoBehaviour
         currentTapsButton++;
         if(currentTapsButton >= TapsToAchieve)
         {
-            tapButton.interactable = false;
+            TapButton.interactable = false;
             Debug.Log("==>Tap button disabled!, check step mission status!");
             ControllerStep.CheckStatusStep();
         }

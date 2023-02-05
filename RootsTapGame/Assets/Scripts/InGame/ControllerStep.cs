@@ -22,6 +22,9 @@ public class ControllerStep : MonoBehaviour
 
     int totalTapsStepMission;
 
+    [SerializeField]
+    private GameObject panelReward;
+
     public UnityEvent StartGame;
 
     [ContextMenu("SetTapButtons")]
@@ -49,7 +52,7 @@ public class ControllerStep : MonoBehaviour
 
             if (tapsButtons[randButton].gameObject.activeInHierarchy)
             {
-                tapsButtons[randButton].gameObject.SetActive(false);
+                tapsButtons[randButton].TapButton.gameObject.SetActive(false);
                 tapButtonsDisabled.Add(tapsButtons[randButton]);
                 tapsButtons.RemoveAt(randButton);
 
@@ -75,10 +78,15 @@ public class ControllerStep : MonoBehaviour
             Debug.Log("==>Mission step finished!");
             GameController.Instance.CurrentStatusGame = StatusGame.Idle;
 
-            gameExecutor.StepMissionFinished();//Probably call from a button
+            panelReward.gameObject.SetActive(true);
             
             return;
         }
         Debug.Log("==There are taps!! "+CurrentTaps +" Total taps: "+totalTapsStepMission);
+    }
+
+    public void ButtonConfirmStepMissionFinished()
+    {
+        gameExecutor.StepMissionFinished();
     }
 }

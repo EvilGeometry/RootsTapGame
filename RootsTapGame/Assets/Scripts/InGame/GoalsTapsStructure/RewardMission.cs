@@ -8,6 +8,11 @@ public enum StatusReward {NoObtained, Obtained}
 public class RewardMission : ScriptableObject
 {
     [SerializeField]
+    private Sprite iconReward;
+
+    public Sprite IconReward { get => iconReward; set => iconReward = value; }
+
+    [SerializeField]
     private StatusReward currentStatusReward;
 
     [SerializeField]
