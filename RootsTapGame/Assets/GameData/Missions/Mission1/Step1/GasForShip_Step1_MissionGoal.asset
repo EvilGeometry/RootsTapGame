@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e04d734e37b25e41973d403b18afc40, type: 3}
+  m_Name: GasForShip_Step1_MissionGoal
+  m_EditorClassIdentifier: 
+  totalTaps: 50
+  rewards:
+  - {fileID: 11400000, guid: 29335bf4ac1a3144bbdea417e8120a4b, type: 2}
+  - {fileID: 11400000, guid: ab1d07e72ea28de4e91de45912da40d5, type: 2}

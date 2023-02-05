@@ -28,6 +28,7 @@ public class ButtonMap : MonoBehaviour
     public void StartMission(string sceneName)
     {
         GameController.Instance.CurrentMissionToPlay = missionInfo;
+        GameController.Instance.CurrentStatusGame = StatusGame.Idle;
         StartCoroutine(LoadScene(sceneName));
     }
 

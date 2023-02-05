@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 551d3c77fe03adf4495dc52d63b7c7d6, type: 3}
-  m_Name: MissionData_1
+  m_Script: {fileID: 11500000, guid: fa196792cb9f147478291684bfcf5fe9, type: 3}
+  m_Name: RecoverHealthPowerUp_Reward
   m_EditorClassIdentifier: 
-  missionsList:
-  - missionStepGame: {fileID: 0}
-    backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
+  currentStatusReward: 0
+  typeReward: 2
+  multiplierTaps: 0
+  cooldown: 1
