@@ -11,21 +11,24 @@ public class MissionInfo_SO : ScriptableObject
     private MissionStatus missionStatus;
 
     /// <summary>
+    /// The prefab tha will be played.
+    /// </summary>
+    [SerializeField]
+    private GameObject missionStepGame;
+
+    /// <summary>
     /// A list with the missions steps to be played.
     /// </summary>
     [SerializeField]
     private MissionStepStructure[] missionsList;
 
     public MissionStepStructure[] MissionsList { get => missionsList;}
+    public GameObject MissionStepGame { get => missionStepGame; set => missionStepGame = value; }
 }
 
 [System.Serializable]
 public class MissionStepStructure
 {
-    /// <summary>
-    /// The prefab tha will be played.
-    /// </summary>
-    public GameObject missionStepGame;
     /// <summary>
     /// The background of the step mission.
     /// </summary>

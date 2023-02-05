@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: MissionData_1
   m_EditorClassIdentifier: 
   missionStatus: 1
+  missionStepGame: {fileID: 460040323480571326, guid: aac72e7c798e3ba4abcfc2ac78b2665a, type: 3}
   missionsList:
-  - missionStepGame: {fileID: 460040323480571326, guid: aac72e7c798e3ba4abcfc2ac78b2665a, type: 3}
-    backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
+  - backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
     missionGoalToAchieve: {fileID: 11400000, guid: 2a4835e14e7ebe844a37840840761dd2, type: 2}
-  - missionStepGame: {fileID: 460040323480571326, guid: aac72e7c798e3ba4abcfc2ac78b2665a, type: 3}
-    backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
+  - backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
     missionGoalToAchieve: {fileID: 11400000, guid: bd75d46ad678a554ea57628d480bdc68, type: 2}
-  - missionStepGame: {fileID: 460040323480571326, guid: aac72e7c798e3ba4abcfc2ac78b2665a, type: 3}
-    backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
+  - backgroundMissionStep: {fileID: 21300000, guid: f0f4e0f8d152d714aa5c8d3ba66bafbd, type: 3}
     missionGoalToAchieve: {fileID: 11400000, guid: d9157b69ded80e84daf3a5e3e21033f7, type: 2}

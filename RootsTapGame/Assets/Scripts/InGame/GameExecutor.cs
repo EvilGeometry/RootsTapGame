@@ -14,6 +14,8 @@ public class GameExecutor : MonoBehaviour
     [SerializeField]
     private Transform canvasGame;
 
+    public int IndexStepMission { get => indexStepMission; set => indexStepMission = value; }
+
     IEnumerator Start()
     {
         GameController.Instance.CurrentStatusGame = StatusGame.Idle;
@@ -40,9 +42,13 @@ public class GameExecutor : MonoBehaviour
 
     public void SetStepMission(MissionInfo_SO currentStepMisison)
     {
-        backgroundGame.sprite = currentStepMisison.MissionsList[indexStepMission].backgroundMissionStep;
-        GameObject stepMission = Instantiate(GameController.Instance.CurrentMissionToPlay.MissionsList[indexStepMission].missionStepGame, canvasGame);
-        stepMission.transform.SetParent(canvasGame);
+        backgroundGame.sprite = currentStepMisison.MissionsList[IndexStepMission].backgroundMissionStep;
+        GameObject gameObjStepMission = Instantiate(currentStepMisison.MissionStepGame, canvasGame);
+        gameObjStepMission.transform.SetParent(canvasGame);
+        
+        ControllerStep stepMission = gameObjStepMission.GetComponent<ControllerStep>();
+        stepMission.GameExecutor = this;
+        stepMission.SetTapButtons();
 
         GameController.Instance.CurrentStatusGame = StatusGame.Play;
     }
